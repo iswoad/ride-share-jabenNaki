@@ -1,0 +1,27 @@
+[
+  {
+      "id": 1,
+      "rideType": "Bike",
+      "image": "https://i.ibb.co/8dfZ77m/Frame.png"
+      
+  },
+
+  {
+      "id": 2,
+      "rideType": "Car",
+      "image": "https://i.ibb.co/BwFnpwy/Frame-2.png"
+      
+  },
+  {
+      "id": 3,
+      "rideType": "Bus",
+      "image": "https://i.ibb.co/B6McX5h/Frame-1.png"
+      
+  },
+  {
+      "id": 4,
+      "rideType": "Train",
+      "image": "https://i.ibb.co/fkGGtjv/Group.png"
+      
+  }
+]
