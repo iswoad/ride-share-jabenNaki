@@ -8,12 +8,14 @@
   background: transparent;
 }
 
-.home{
+/* .rideSection{
     background-image: url("../../images/Bg.png");
     min-height: 100vh;
     min-width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
+    align-items: center; 
+    
+} */
 

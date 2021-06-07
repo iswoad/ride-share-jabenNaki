@@ -1,18 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+
+
+const useStyles = makeStyles(({
+    header: {
+        background: 'none',
+        color: "black"
+    },
+    title: {
+        
+    },
+}));
 
 
 const Header = () => {
-    return (
-        <div class = 'header'>
-            <nav>
-                <Link>Home</Link>
-                <Link>Destination</Link>
-                <Link>Blog</Link>
-                <Link>Contact</Link>
-            </nav>
+    const classes = useStyles();
 
-        </div>
+    return (
+
+        <AppBar className={classes.header} >
+            <Toolbar>
+                <Typography variant="h6" className={classes.title}>
+                    Jaben Naki
+                </Typography>
+                
+            </Toolbar>
+        </AppBar>
+
     );
 };
 
