@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -28,6 +29,10 @@ const Header = () => {
                 <Typography variant="h6" className={classes.title}>
                     Jaben Naki
                 </Typography>
+                <Link to="/home">Home</Link>
+                <Link to="/destination">destination</Link>
+                <Link to="/login">Login</Link>
+
                 
             </Toolbar>
         </AppBar>

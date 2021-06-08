@@ -44,7 +44,7 @@ const Home = () => {
                             </Grid>
                         )
                     }
-                </Grid> 
+                </Grid>
                 </Container> 
         </div>
 
