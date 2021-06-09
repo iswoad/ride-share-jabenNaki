@@ -5,6 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
     root: {
@@ -22,11 +23,13 @@ const useStyles = makeStyles({
 
 const RideOption = (props) => {
 
+    const history = useHistory();
+
     const { rideType, image } = props.ride;
     const classes = useStyles();
 
     const handleRideSelect = () =>{
-      console.log('ride clicked')
+      history.push('/destination');
     }
 
     return (

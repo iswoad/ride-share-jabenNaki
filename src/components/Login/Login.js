@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -45,31 +45,42 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
     const classes = useStyles();
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: '',
+        email: ''
+    })
 
 
     const provider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleSignIn = () => {
         firebase.auth().signInWithPopup(provider)
-            .then((result) => {
-                /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential;
-
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = credential.accessToken;
-                // The signed-in user info.
-                var user = result.user;
-                // ...
-                console.log(user)
+            .then(res => {
+                const { displayName, email } = res.user;
+                const signedInUser = {
+                    isSignedIn: true,
+                    name: displayName,
+                    email: email
+                }
+                setUser(signedInUser);
+                console.log(user.displayName)
             }).catch((error) => {
                 // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                const errorCode = error.code;
+                const errorMessage = error.message;
                 // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
+                console.log(errorCode)
+                console.log(errorMessage)
                 // ...
             });
+    }
+
+    const handleChange = (e) => {
+        console.log(e.target.name,e.target.value);
+        
+    }
+    const handleSubmit = () => {
+
     }
 
     return (
@@ -82,8 +93,9 @@ const Login = () => {
                 <Typography component="h1" variant="h5">
                     Sign in
         </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
+                        onBlur={handleChange}
                         variant="outlined"
                         margin="normal"
                         required
@@ -95,6 +107,7 @@ const Login = () => {
                         autoFocus
                     />
                     <TextField
+                        onBlur={handleChange}
                         variant="outlined"
                         margin="normal"
                         required
@@ -132,8 +145,11 @@ const Login = () => {
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
+            <Box mt={3}>
                 <button onClick={handleGoogleSignIn}>Sign In With Google</button>
+                {
+                    user.isSignedIn && <p>Welcome, {user.name}</p>
+                }
             </Box>
         </Container>
     );
