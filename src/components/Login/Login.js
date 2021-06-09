@@ -48,7 +48,8 @@ const Login = () => {
     const [user, setUser] = useState({
         isSignedIn: false,
         name: '',
-        email: ''
+        email: '',
+        password: ''
     })
 
 
@@ -60,98 +61,131 @@ const Login = () => {
                 const signedInUser = {
                     isSignedIn: true,
                     name: displayName,
-                    email: email
+                    email: email,
                 }
                 setUser(signedInUser);
                 console.log(user.displayName)
             }).catch((error) => {
-                // Handle Errors here.
+
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // The email of the user's account used.
+
                 console.log(errorCode)
                 console.log(errorMessage)
-                // ...
+
             });
     }
 
-    const handleChange = (e) => {
-        console.log(e.target.name,e.target.value);
-        
+    const handleBlur = (e) => {
+        let isFormValid = true;
+        debugger
+        if (e.target.name === 'email') {
+            isFormValid = /\S+@\S+\.\S+/.test(e.target.value);
+
+        }
+        if (e.target.name === 'password') {
+            const isPasswordValid = e.target.value.length > 6;
+            const passwordHasNumber = /\d{1}/.test(e.target.value);
+            isFormValid = isPasswordValid && passwordHasNumber;
+        }
+        if (isFormValid) {
+            const newUserInfo = { ...user };
+            newUserInfo[e.target.name] = e.target.value;
+            setUser(newUserInfo);
+
+        }
+
     }
     const handleSubmit = () => {
 
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
+        <div>
+            <p>Name: {user.name}</p>
+            <p>Email: {user.email}</p>
+            <p>Password: {user.password}</p>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
         </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                    <TextField
-                        onBlur={handleChange}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        onBlur={handleChange}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
+
+                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                        <TextField
+                            onBlur={handleBlur}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="Your Name"
+                            name="name"
+                            autoFocus
+                        />
+                        <TextField
+                            onBlur={handleBlur}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField
+                            onBlur={handleBlur}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password(should contain one digit)"
+                            type="password"
+                            id="password"
+                            autoFocus
+
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign In
           </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
               </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={3}>
-                <button onClick={handleGoogleSignIn}>Sign In With Google</button>
-                {
-                    user.isSignedIn && <p>Welcome, {user.name}</p>
-                }
-            </Box>
-        </Container>
+                    </form>
+                </div>
+                <Box mt={3}>
+                    <button onClick={handleGoogleSignIn}>Sign In With Google</button>
+
+                </Box>
+            </Container>
+        </div>
+
     );
 };
 
