@@ -49,7 +49,8 @@ const Login = () => {
         isSignedIn: false,
         name: '',
         email: '',
-        password: ''
+        password: '',
+        error: ''
     })
 
 
@@ -64,7 +65,6 @@ const Login = () => {
                     email: email,
                 }
                 setUser(signedInUser);
-                console.log(user.displayName)
             }).catch((error) => {
 
                 const errorCode = error.code;
@@ -78,7 +78,6 @@ const Login = () => {
 
     const handleBlur = (e) => {
         let isFormValid = true;
-        debugger
         if (e.target.name === 'email') {
             isFormValid = /\S+@\S+\.\S+/.test(e.target.value);
 
@@ -96,95 +95,106 @@ const Login = () => {
         }
 
     }
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        if (user.email && user.password) {
+            firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+                .then( res => {
+                    console.log(res)
+                })
+                .catch( error => {
+                    const newUserInfo = {...user};
+                    newUserInfo.error = error.message;
+                    setUser(newUserInfo);
+                })
+            // console.log('submitting');
+        }
+        e.preventDefault()
     }
 
     return (
-        <div>
-            <p>Name: {user.name}</p>
-            <p>Email: {user.email}</p>
-            <p>Password: {user.password}</p>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-        </Typography>
 
-                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                        <TextField
-                            onBlur={handleBlur}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="name"
-                            label="Your Name"
-                            name="name"
-                            autoFocus
-                        />
-                        <TextField
-                            onBlur={handleBlur}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            onBlur={handleBlur}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password(should contain one digit)"
-                            type="password"
-                            id="password"
-                            autoFocus
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign in
+                </Typography>
 
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Sign In
-          </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-              </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                    <TextField
+                        onBlur={handleBlur}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Your Name"
+                        name="name"
+                        autoFocus
+                    />
+                    <TextField
+                        onBlur={handleBlur}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                    />
+                    <TextField
+                        onBlur={handleBlur}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password(should contain one digit)"
+                        type="password"
+                        id="password"
+                        autoFocus
+
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Remember me"
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign In
+                     </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link href="#" variant="body2">
+                                Forgot password?
+                            </Link>
                         </Grid>
-                    </form>
-                </div>
-                <Box mt={3}>
-                    <button onClick={handleGoogleSignIn}>Sign In With Google</button>
+                        <Grid item>
+                            <Link href="#" variant="body2">
+                                {"Don't have an account? Sign Up"}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+            </div>
+            <Box mt={3}>
+                <button onClick={handleGoogleSignIn}>Sign In With Google</button>
+            </Box>
+            <div>
+                <h1>{user.error}</h1>
+            </div>
+        </Container>
 
-                </Box>
-            </Container>
-        </div>
 
     );
 };
