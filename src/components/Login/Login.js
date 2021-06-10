@@ -45,12 +45,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
     const classes = useStyles();
+
+    const [newUser, setNewUser] = useState(false);
     const [user, setUser] = useState({
         isSignedIn: false,
         name: '',
         email: '',
         password: '',
-        error: ''
+        error: '',
+        success: false
     })
 
 
@@ -96,19 +99,52 @@ const Login = () => {
 
     }
     const handleSubmit = (e) => {
-        if (user.email && user.password) {
+        if (newUser && user.email && user.password) {
             firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-                .then( res => {
-                    console.log(res)
+                .then(res => {
+                    const newUserInfo = { ...user };
+                    newUserInfo.error = '';
+                    newUserInfo.success = true;
+                    setUser(newUserInfo);
+                    updateUserName(user.name);
+                    console.log(res);
                 })
-                .catch( error => {
-                    const newUserInfo = {...user};
+                .catch(error => {
+                    const newUserInfo = { ...user };
                     newUserInfo.error = error.message;
                     setUser(newUserInfo);
                 })
             // console.log('submitting');
         }
+
+        if (!newUser) {
+            firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+                .then(res => {
+                    const newUserInfo = { ...user };
+                    newUserInfo.error = '';
+                    newUserInfo.success = true;
+                    setUser(newUserInfo);
+                })
+                .catch(error => {
+                    const newUserInfo = { ...user };
+                    newUserInfo.error = error.message;
+                    setUser(newUserInfo);
+                })
+        }
         e.preventDefault()
+    }
+
+    const updateUserName = name => {
+        var user = firebase.auth().currentUser;
+
+        user.updateProfile({
+            displayName: name
+        
+        }).then(function () {
+            console.log('user name updated successfully')
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
@@ -124,17 +160,20 @@ const Login = () => {
                 </Typography>
 
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                    <TextField
-                        onBlur={handleBlur}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="name"
-                        label="Your Name"
-                        name="name"
-                        autoFocus
-                    />
+                    {
+                        newUser &&
+                        <TextField
+                            onBlur={handleBlur}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="Your Name"
+                            name="name"
+                            autoFocus
+                        />
+                    }
                     <TextField
                         onBlur={handleBlur}
                         variant="outlined"
@@ -180,7 +219,7 @@ const Login = () => {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link onClick={() => setNewUser(!newUser)} href="#" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
@@ -191,7 +230,10 @@ const Login = () => {
                 <button onClick={handleGoogleSignIn}>Sign In With Google</button>
             </Box>
             <div>
-                <h1>{user.error}</h1>
+                <p style={{ color: 'red' }}>{user.error}</p>
+                {
+                    user.success && <p style={{ color: 'green' }}>User {newUser ? 'created' : 'Logged In'} successfully</p>
+                }
             </div>
         </Container>
 
