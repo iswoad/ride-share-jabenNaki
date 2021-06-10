@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import firebase from 'firebase/app'
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
+import { UserContext } from '../../App';
 
 
 if (firebase.apps.length === 0) {
@@ -55,6 +56,9 @@ const Login = () => {
         error: '',
         success: false
     })
+
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
 
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -117,13 +121,15 @@ const Login = () => {
             // console.log('submitting');
         }
 
-        if (!newUser) {
+        if (!newUser && user.email && user.password ) {
             firebase.auth().signInWithEmailAndPassword(user.email, user.password)
                 .then(res => {
                     const newUserInfo = { ...user };
                     newUserInfo.error = '';
                     newUserInfo.success = true;
                     setUser(newUserInfo);
+                    setLoggedInUser(newUserInfo);
+                    console.log('sign in user info', res.user);
                 })
                 .catch(error => {
                     const newUserInfo = { ...user };
@@ -210,7 +216,7 @@ const Login = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        {newUser? <b>Submit</b> : <b>Sign In</b> }
                      </Button>
                     <Grid container>
                         <Grid item xs>
