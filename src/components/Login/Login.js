@@ -58,7 +58,7 @@ const Login = () => {
     })
 
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
 
 
     const provider = new firebase.auth.GoogleAuthProvider();
