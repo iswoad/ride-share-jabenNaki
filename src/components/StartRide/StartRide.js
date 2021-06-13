@@ -1,31 +1,13 @@
-import { Container, makeStyles } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import './StartRide.css';
 import FakeData from '../../FakeData/FakeData.json';
-import map from '../../images/Dhaka-google-maps.jpg'
+import map from '../../images/Dhaka-google-maps.jpg';
 // import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
+
 
 
 const StartRide = () => {
