@@ -166,7 +166,7 @@ const Login = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    { newUser ? 'Sign up' : 'Sign in'}
                 </Typography>
 
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
@@ -220,7 +220,7 @@ const Login = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        {newUser? <b>Submit</b> : <b>Sign In</b> }
+                        {newUser ? 'Create an account' : 'Signin'}
                      </Button>
                     <Grid container>
                         <Grid item xs>
@@ -230,7 +230,7 @@ const Login = () => {
                         </Grid>
                         <Grid item>
                             <Link onClick={() => setNewUser(!newUser)} href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                { newUser ? 'Already have an account' : ' Create an account' }
                             </Link>
                         </Grid>
                     </Grid>

@@ -2,26 +2,34 @@
   {
       "id": 1,
       "rideType": "Bike",
-      "image": "https://i.ibb.co/8dfZ77m/Frame.png"
+      "image": "https://i.ibb.co/8dfZ77m/Frame.png",
+      "seat": "3",
+      "price": "25$"
       
   },
 
   {
       "id": 2,
       "rideType": "Car",
-      "image": "https://i.ibb.co/BwFnpwy/Frame-2.png"
+      "image": "https://i.ibb.co/BwFnpwy/Frame-2.png",
+      "seat": "3",
+      "price": "25$"
       
   },
   {
       "id": 3,
       "rideType": "Bus",
-      "image": "https://i.ibb.co/B6McX5h/Frame-1.png"
+      "image": "https://i.ibb.co/B6McX5h/Frame-1.png",
+      "seat": "3",
+      "price": "25$"
       
   },
   {
       "id": 4,
       "rideType": "Train",
-      "image": "https://i.ibb.co/fkGGtjv/Group.png"
+      "image": "https://i.ibb.co/fkGGtjv/Group.png",
+      "seat": "3",
+      "price": "25$"
       
   }
 ]

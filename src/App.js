@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";  
 import Login from './components/Login/Login';
 import Destination from './components/Desitinaiton/Destination';
+import StartRide from './components/StartRide/StartRide';
 import { createContext, useState } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
@@ -20,7 +21,7 @@ function App(props) {
     <UserContext.Provider value = {[loggedInUser, setLoggedInUser]}>
       <Router>
         <Header></Header>
-        <h1>Name: {loggedInUser.email}</h1>
+        {/* <h1>Name: {loggedInUser.email}</h1> */}
         <Switch>
           <Route path ='/home'>
             <Home></Home>
@@ -31,8 +32,11 @@ function App(props) {
           <Route path ='/login'>
             <Login></Login>
           </Route>
-          <PrivateRoute>
+          <PrivateRoute path = "/destination/:rideKey">
             <Destination />
+          </PrivateRoute>
+          <PrivateRoute path = "/startRide/:rideKey">
+            <StartRide></StartRide>
           </PrivateRoute>
         </Switch>
       </Router>

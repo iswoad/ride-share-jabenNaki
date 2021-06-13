@@ -1,0 +1,24 @@
+.twin-container{
+    display: flex;
+    border-top: 1px solid lightgray;
+}
+.start-container{
+    width: 30%;
+    margin-left: 20px;
+    margin-right: 5px;
+    border-right: 1px solid lightgray;
+}
+.bike{
+    border: 1px solid gray;
+    border-radius: 3px;
+    background-color: lightGray;
+    margin-bottom: 10px;
+}
+.divStyle{
+    border: 1px solid rgb(215, 218, 43);
+    border-radius: 3px;
+    background-color: rgb(231, 118, 12);
+    padding-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}

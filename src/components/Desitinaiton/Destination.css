@@ -1,0 +1,10 @@
+.twin-container{
+    display: flex;
+    border-top: 1px solid lightgray;
+}
+.destination-container{
+    width: 30%;
+    margin-left: 20px;
+    margin-right: 5px;
+    border-right: 1px solid lightgray;
+}

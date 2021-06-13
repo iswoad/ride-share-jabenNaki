@@ -22,19 +22,20 @@ const useStyles = makeStyles({
 
 
 const RideOption = (props) => {
-
+    console.log(props);
     const history = useHistory();
 
-    const { rideType, image } = props.ride;
+    const { rideType, image, id } = props.ride;
     const classes = useStyles();
 
-    const handleRideSelect = () =>{
-      history.push('/destination');
+    const handleRideSelect = (id) =>{
+      history.push(`/destination/${id}`);
     }
+
 
     return (
       
-          <Card onClick = {() => handleRideSelect()} className={classes.root}>
+          <Card onClick = {() => handleRideSelect(id)} className={classes.root}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -47,6 +48,9 @@ const RideOption = (props) => {
                   <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                       {rideType}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {id}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

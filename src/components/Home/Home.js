@@ -30,7 +30,7 @@ const Home = () => {
     useEffect(() => {
         setRides(fakeData)
     }, [])
-    console.log(rides)
+    
     return (
 
         <div className={classes.root}>
