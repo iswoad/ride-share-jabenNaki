@@ -29,7 +29,7 @@ function App(props) {
           <Route path ='/home'>
             <Home></Home>
           </Route>
-          <PrivateRoute path = "/destination">
+          <PrivateRoute path = "/destination/:rideKey">
             <Destination />
           </PrivateRoute>
           <PrivateRoute path = "/startRide/:rideKey">
