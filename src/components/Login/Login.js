@@ -19,6 +19,7 @@ import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
 
 
+
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -237,7 +238,7 @@ const Login = () => {
                 </form>
             </div>
             <Box mt={3}>
-                <button onClick={handleGoogleSignIn}>Sign In With Google</button>
+                <Button variant="outlined" color="primary" onClick={handleGoogleSignIn}>Sign In With Google </Button>
             </Box>
             <div>
                 <p style={{ color: 'red' }}>{user.error}</p>

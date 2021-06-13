@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a react web app that has sign in with google and also own authentication with user input form. Firebase auth was implemented in this project. Also deployed in firebase.
+Life site Link https://jaben-naki-ride.web.app/ .
 
 ## Available Scripts
 

@@ -23,21 +23,21 @@ function App(props) {
         <Header></Header>
         {/* <h1>Name: {loggedInUser.email}</h1> */}
         <Switch>
+        <Route exact path ='/'>
+            <Home></Home>
+          </Route>
           <Route path ='/home'>
             <Home></Home>
           </Route>
-          <Route exact path ='/'>
-            <Home></Home>
-          </Route>
-          <Route path ='/login'>
-            <Login></Login>
-          </Route>
-          <PrivateRoute path = "/destination/:rideKey">
+          <PrivateRoute path = "/destination">
             <Destination />
           </PrivateRoute>
           <PrivateRoute path = "/startRide/:rideKey">
             <StartRide></StartRide>
           </PrivateRoute>
+          <Route path ='/login'>
+            <Login></Login>
+          </Route>
         </Switch>
       </Router>
       </UserContext.Provider>

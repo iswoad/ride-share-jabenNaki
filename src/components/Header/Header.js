@@ -39,13 +39,13 @@ const Header = () => {
                     <Grid>
                         <div>
                             <IconButton>
-                                <Link to="/home">Home</Link>
+                                <Link to="/home" style={{ textDecoration: 'none' }}>Home</Link>
                             </IconButton>
                             <IconButton>
-                                <Link to="/destination">destination</Link>
+                                <Link to="/destination" style={{ textDecoration: 'none' }}>Destination</Link>
                             </IconButton>
                             <IconButton>
-                                <Link to="/login">Login</Link>
+                                <Link to="/login" style={{ textDecoration: 'none' }}>Login</Link>
                             </IconButton>
                         </div>
                     </Grid>
