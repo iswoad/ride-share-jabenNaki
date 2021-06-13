@@ -49,9 +49,6 @@ const RideOption = (props) => {
                     <Typography variant="body2" color="textSecondary" component="p">
                       {rideType}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {id}
-                    </Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
