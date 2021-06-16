@@ -75,7 +75,8 @@ const Login = () => {
                     name: displayName,
                     email: email,
                 }
-                setUser(signedInUser);
+                setLoggedInUser(signedInUser);
+                history.replace(from);
             }).catch((error) => {
 
                 const errorCode = error.code;

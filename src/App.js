@@ -21,13 +21,14 @@ function App(props) {
     <UserContext.Provider value = {[loggedInUser, setLoggedInUser]}>
       <Router>
         <Header></Header>
-        {/* <h1>Name: {loggedInUser.email}</h1> */}
+        <h1>User Email: {loggedInUser.email}</h1>
         <Switch>
-        <Route exact path ='/'>
-            <Home></Home>
-          </Route>
+          
           <Route path ='/home'>
             <Home></Home>
+          </Route>
+          <Route path ='/login'>
+            <Login></Login>
           </Route>
           <PrivateRoute path = "/destination/:rideKey">
             <Destination />
@@ -35,8 +36,8 @@ function App(props) {
           <PrivateRoute path = "/startRide/:rideKey">
             <StartRide></StartRide>
           </PrivateRoute>
-          <Route path ='/login'>
-            <Login></Login>
+          <Route exact path ='/'>
+            <Home></Home>
           </Route>
         </Switch>
       </Router>
